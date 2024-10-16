@@ -30,10 +30,15 @@ const taskSchema = new mongoose.Schema({
 
 const Task = mongoose.model('Task', taskSchema);
 
-app.get('/tasks', async (req, res) => {
+
+app.get('/', (req, res) => {
+    res.send('Servidor funcionando correctamente');
+});
+
+/*app.get('/tasks', async (req, res) => {
     const tasks = await Task.find();
     res.json(tasks);
-});
+});*/
 
 app.post('/tasks', async (req, res) => {
     const newTask = new Task(req.body);
