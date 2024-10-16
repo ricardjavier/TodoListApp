@@ -7,11 +7,21 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect('mongodb://localhost:27017/todolist', {
+
+module.exports = async () => {
+    try {
+        await mongoose.connect(process.env.DB_URL, {});
+        console.log("CONNECTED TO DATABASE SUCCESSFULLY");
+    } catch (error) {
+        console.error('COULD NOT CONNECT TO DATABASE:', error.message);
+    }
+};
+
+/*mongoose.connect('mongodb://localhost:27017/todolist', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => console.log('MongoDB connected'))
-  .catch(err => console.error(err));
+  .catch(err => console.error(err));*/
 
 const taskSchema = new mongoose.Schema({
     name: String,
